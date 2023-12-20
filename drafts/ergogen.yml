@@ -1,0 +1,133 @@
+  units:
+    kx: 5.5
+    ky: 5.5
+    px: kx + 4.5
+    py: ky + 4.5
+    pp: 0.5px # pcb padding
+    pm: pp+0.5 # pcb margin
+    pw: pm+2 # case walls
+  points:
+    zones:
+      matrix:
+        key:
+          padding: 1px
+          spread: 1px
+        columns:
+          pinky:
+            # rows.home.skip: true
+          ring:
+            key:
+              stagger: 0 #5
+          middle:
+          index:
+          inner:
+        rows:
+          mod:
+          bottom:
+          home:
+          top:
+    rotate: -10
+    mirror:
+      ref: matrix_inner_home
+      distance: 19
+  outlines:
+    raw:
+      - what: rectangle
+        where: true
+        size: [kx, ky]
+    keys:
+      - what: rectangle
+        where: true
+        size: [kx-0.5,ky-0.5]
+    keys_holes:
+      - what: rectangle
+        where: true
+        size: [kx+1.5,ky+1.5]
+        fillet: 1.5
+    pole_mounts_holes:
+      - what: circle
+        where: /matrix_(pinky|index)_(top|bottom)/
+        adjust.shift: [px/2,-py/2]
+        radius: 0.65 # screws are M1.6, but holes should be smaller
+    pole_mounts:
+      - what: circle
+        where: /matrix_(pinky|index)_(top|bottom)/
+        adjust.shift: [px/2,-py/2]
+        radius: 1.5
+      - operation: subtract
+        name: pole_mounts_holes
+    board:
+      - what: polygon
+        operation: stack
+        points:
+          - ref: matrix_pinky_top
+            shift: [-pp,pp]
+          - ref: mirror_matrix_pinky_top
+            shift: [-pp,pp]
+          - ref: mirror_matrix_pinky_mod
+            shift: [-pp,-pp]
+          - ref: mirror_matrix_inner_mod
+            shift: [pp,-pp]
+          - ref: matrix_inner_mod
+            shift: [pp,-pp]
+          - ref: matrix_pinky_mod
+            shift: [-pp,-pp]
+        fillet: 3
+    board_margin:
+      - what: polygon
+        operation: stack
+        points:
+          - ref: matrix_pinky_top
+            shift: [-pm,pm]
+          - ref: mirror_matrix_pinky_top
+            shift: [-pm,pm]
+          - ref: mirror_matrix_pinky_mod
+            shift: [-pm,-pm]
+          - ref: mirror_matrix_inner_mod
+            shift: [pm,-pm]
+          - ref: matrix_inner_mod
+            shift: [pm,-pm]
+          - ref: matrix_pinky_mod
+            shift: [-pm,-pm]
+        fillet: 3
+    board_walls:
+      - what: polygon
+        operation: stack
+        points:
+          - ref: matrix_pinky_top
+            shift: [-pw,pw]
+          - ref: mirror_matrix_pinky_top
+            shift: [-pw,pw]
+          - ref: mirror_matrix_pinky_mod
+            shift: [-pw,-pw]
+          - ref: mirror_matrix_inner_mod
+            shift: [pw,-pw]
+          - ref: matrix_inner_mod
+            shift: [pw,-pw]
+          - ref: matrix_pinky_mod
+            shift: [-pw,-pw]
+        fillet: 3
+    # Combination preview showing outline and keys.
+    pcb_combo:
+      - name: board
+      - operation: subtract
+        name: keys
+    case_combo:
+      - name: board
+      - operation: subtract
+        name: keys_holes
+    board_margin_combo:
+      - name: board_margin
+      - operation: subtract
+        name: board
+    board_walls_combo:
+      - name: board_walls
+      - operation: subtract
+        name: board_margin
+    complete_combo:
+      - name: board_walls_combo
+      - operation: add
+        name: case_combo
+      - operation: subtract
+        name: pole_mounts
+    
