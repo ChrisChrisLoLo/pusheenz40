@@ -6,10 +6,10 @@
     pp: 0.5px # pcb padding
     pm: pp+0.5 # pcb margin
     pw: pm+1.5 # case walls
-    kcr: kx/2 # key cap radius
-    kchr: kcr + 0.5 # key cap hole radius
+    kcr: kx/2 + 0.4 # key cap radius
+    kchr: kcr + 0.25 # key cap hole radius
     kcbr: kchr + 0.4 # key cap base radius
-    kcbhr: kcbr + 0.5 # key cap base hole radius
+    kcbhr: kcbr + 0.25 # key cap base hole radius
     kcsx: kcbr * 2 # key cap slider x
     kcsy: 2.5 # key cap slider y
     kcsry: kcsy - 0.4 # key cap slider rail y
@@ -80,7 +80,7 @@
       - what: circle
         where: /matrix_(pinky|index)_(top|bottom)/
         adjust.shift: [px/2,-py/2]
-        radius: 0.65 # screws are M1.6, but holes should be smaller
+        radius: 0.75 # screws are M1.6, but holes should be smaller
     pole_mounts:
       - what: circle
         where: /matrix_(pinky|index)_(top|bottom)/
@@ -151,6 +151,8 @@
     keycaps_combo:
       - name: keycap_base_combo
       - operation: add
+        name: keycaps_top
+      - operation: subtract
         name: keycaps_top
     case_combo:
       - name: board
