@@ -1,5 +1,5 @@
 # pusheenz40
-An experimental ultraportable keyboard that uses SMD mouse switches (EVQP0N02B) to achieve a compact form factor (8mm thick) while still being viable as a daily use keyboard (85+ wpm). Entire PCBA can be produced by JLCPCB. Uses 3D printed keycaps.
+An experimental ultraportable pocket keyboard that uses low profile SMD mouse switches (EVQP0N02B) to achieve a compact form factor (8mm thick) while still being viable as a daily use keyboard (85+ wpm). Entire PCBA can be produced by JLCPCB. Uses 3D printed keycaps.
 
 ![a photo of a pusheenz40](https://raw.githubusercontent.com/ChrisChrisLoLo/pusheenz40/main/photos/PXL_20240128_191510082.jpg)
 
@@ -9,19 +9,19 @@ v0.0 PCBs are working! A pcb produced from the files should work.
 Disclaimer is that this design has very low tolerances for its key switches. You will likely need a 3D printer such as a Bambu Lab A1/A1 mini/P1P/P1S and set the slicing layer resolution to 0.08mm. Printers like the Prusa i3/mini may also work, but have not been tested.
 
 # About
-I hit the limit as how small I could go with choc switches. I found that kailh mute switches are an ideal small form factor alternative in terms of their size, durability, and actuation force. To make this board more accessible to build at home, it uses a rp2040-zero board that can be soldered on.
+I hit the limit as how small I could go with choc switches. For my bunchiez40 and modkipz40, I used kailh mute switches as a smaller alternative. While a good start, these switches are both fairly tall and not super comfortable to type on directly. This board alternatively uses SMD EVQP0N02B switches from LCSC, which lowers the board height considerably, and reduces manual assembly required. This board also uses 3D printed buttons, which makes keypresses more comfortable.
 
 More details about my research on mouse switches and experience with the pusheenz40 can be found here: https://chrischrislolo.github.io/orthoLabLogs/pusheenz40.html
 
-Case files include STLs, STEP files, as well as source OpenSCAD files that can be modified. The OpenSCAD models do not have fillets on them
+Case files include 3MF files, STEP files that include the top case housing, as well as the buttons.
 
 ![a pusheenz40](https://raw.githubusercontent.com/ChrisChrisLoLo/pusheenz40/main/photos/PXL_20240128_191100052.jpg)
 
 
 # Case
-The case files can be found in the `case` directory. The particular files you'll want are the `case_holes` file for the top part of the case, and the `case_holes_floor` file for the bottom part. CNC and 3DP works with the top part of the case, and I chose to 3DP my case bottom.
+The case files can be found in the `case` directory. There is either the inverted rails or simple rails model to choose from. The simple rails model can be cnc'd, but has a rare tendency to have the buttons stick when pressed at a weird angle (1/1000 presses, as a rough guage of frequency). The inverted rails model has less of this issue, but cannot be cnc'd due to its sharp edges. I currently daily drive with the simple rails model.
 
-3D printed cases can and should use the finest resolution possible on your printer, and ideally should use a higher end printer due to it's low tolerances. The models have been tested to work with the Bambu lab A1 and P1S at a layer height and detail setting of 0.08mm (extra fine). More details can be found in the BOM.
+3D printed cases can and should use the finest resolution possible on your printer, and ideally should use a higher end printer due to it's low tolerances. The models have been tested to work with the Bambu lab A1 and P1S at a layer height and detail setting of 0.08mm (extra fine). It's recommended to use a high quality and/or a newer printer.
 
 ## PCB
 You can find the PCB source files in the `pcb` folder. The BOM files can be found in this folder.
@@ -40,13 +40,20 @@ You can find the PCB source files in the `pcb` folder. The BOM files can be foun
 - 1 PCBA
   - The PCB will include all electrical parts required, including switches.
 - 1 Aluminum CNC upper case or 3DP upper case
-  - There is either the inverted rails or simple rails model. The simple rails model can be cnc'd, but has a tendency to have the buttons stick when pressed at a weird angle. The inverted rails model has less of this issue, but cannot be cnc'd due to its sharp edges.
 - 40 3D printed buttons
 - 8 3mm M1.6 screws (go for flathead for a more flush fit, though other head types should also work)
 - 4-8 (ideally 8) 1-2mm bumpons (something like Sj5302 is a good place to start)
 
 ## Assembly
-Pop the 3D printed buttons/keycaps into the case, and make sure they don't stick and can freely move up and down. If 
+Flash the pcb via QMK (see below section). Bootmagic is enabled, so using the top left key to flash from here on out is doable.
+
+Pop the 3D printed buttons/keycaps into the case, and make sure they don't stick and can freely move up and down. If they do stick (e.g. need noticable force applied to pop out), confirm that you're printing at the finest detail setting. All keys need to be flush against the case. Once the switches are in place, over lap the pcb over the case. Gently press the pcb to make sure a button isn't pressed down.
+
+Optionally wrap the board with a rubber band to hold it in place and flip it over to validate everything. Then gently press every button to make sure if it can actuate. If a button is very sticky, reprinting or sanding may be required. If there's slight friction on the keys return, this should slowly go away as the keyboard is broken in. If there's a button that won't actuate, it's possible that the button is misaligned. Flip the board back around, remove the rubber band and pcb, and make sure the problematic key is flush against the case. Place back pcb around and test until all keys properly acutate.
+
+Then turn the keybard around one last time so the pcb is facing upwards. Screw on the screws and test one last time.
+
+Finally, place on the rubber bumpons
 
 ## Firmware
 QMK Firmware can be found here
