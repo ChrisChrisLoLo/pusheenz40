@@ -23,6 +23,8 @@ The case files can be found in the `case` directory. There is either the inverte
 
 3D printed cases can and should use the finest resolution possible on your printer, and ideally should use a higher end printer due to it's low tolerances. The models have been tested to work with the Bambu lab A1 and P1S at a layer height and detail setting of 0.08mm (extra fine). It's recommended to use a high quality and/or a newer printer.
 
+Lubricating the case rails with something like krytox 205g0 is recommended, especially when using a CNC aluminum case. 
+
 ## PCB
 You can find the PCB source files in the `pcb` folder. The BOM files can be found in this folder.
 
