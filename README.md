@@ -8,6 +8,8 @@ v0.0 PCBs are working! A pcb produced from the files should work.
 
 Disclaimer is that this design has very low tolerances for its key switches. You will likely need a 3D printer such as a Bambu Lab A1/A1 mini/P1P/P1S and set the slicing layer resolution to 0.08mm. Printers like the Prusa i3/mini may also work, but have not been tested.
 
+If you want to assemble/order your own PCBAs, come chat in the discord here! https://discord.gg/m8vwnqJEsc
+
 # About
 I hit the limit as how small I could go with choc switches. For my bunchiez40 and modkipz40, I used kailh mute switches as a smaller alternative. While a good start, these switches are both fairly tall and not super comfortable to type on directly. This board alternatively uses SMD EVQP0N02B switches from LCSC, which lowers the board height considerably, and reduces manual assembly required. This board also uses 3D printed buttons, which makes keypresses more comfortable.
 
